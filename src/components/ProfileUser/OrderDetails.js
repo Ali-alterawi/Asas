@@ -6,7 +6,7 @@ const OrderDetails = () => {
       <div class="card text-dark bg-light my-3" style={{ maxWidth: "18rem;" }}>
         <div class="card-header">Details</div>
         <div class="card-body">
-          <h5 class="card-title">User Name:</h5>
+          <h5 class="card-title">Applicant's Name:</h5>
           <p class="card-text">Abd alrahman </p>
           <h5 class="card-title">Mobile Number:</h5>
           <p class="card-text">0777777777</p>
@@ -24,6 +24,8 @@ const OrderDetails = () => {
           </p>
           <h5 class="card-title">Total Area Building:</h5>
           <p class="card-text">1669 m^2</p>
+          <iframe src="./Ali - Software Engineer.pdf" width="200px" height="200px"></iframe>
+
         </div>
       </div>
     </>

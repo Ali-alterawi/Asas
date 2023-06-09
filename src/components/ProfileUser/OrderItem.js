@@ -18,7 +18,7 @@ const OrderItem = () => {
           <h6 className="mt-2">Order number : #52125</h6>
           <h6 className="mt-4"> Status : New</h6>
           <h6 className="mt-4">type of services: Electrical Plan</h6>
-          <h6 className="mt-4">Address: Amman / Jordan</h6>
+          <h6 className="mt-4">Project Address: Amman / Jordan</h6>
           <h6 className="mt-4"> Status of Payment: No</h6>
         </div>
       </div>
