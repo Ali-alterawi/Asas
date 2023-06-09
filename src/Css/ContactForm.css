@@ -1,0 +1,31 @@
+.icon {
+  padding: 2rem 0;
+}
+.card-contact {
+  background-color: #fff;
+  box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
+  border-radius: 1rem;
+  padding: 25px;
+  border: #064080 2px solid;
+  transition: 0.7s ease;
+  background-color: white;
+  color: #064080;
+}
+.card-contact:hover {
+  background-color: #064080;
+  color: white;
+  transform: scale(1.1);
+  .text-blue {
+    color: white;
+  }
+}
+.text-blue {
+  color: #064080;
+}
+#form4Example1,
+#form4Example2,
+#form4Example3,
+#form4Example4 {
+  background-color: #064080;
+  color: #fff;
+}

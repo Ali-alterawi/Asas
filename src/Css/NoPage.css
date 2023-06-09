@@ -1,0 +1,11 @@
+.NoPagaAlert {
+  height: 90vh;
+  width: 100%;
+}
+
+.NoPagaAlert .NoPagaText {
+  height: 40%;
+  width: 40%;
+  border: 5px solid #064080;
+  border-radius: 1.25rem;
+}

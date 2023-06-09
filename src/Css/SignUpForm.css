@@ -1,0 +1,89 @@
+.sign-in {
+  display: flex;
+  justify-content: space-around;
+  height: 80vh;
+  align-items: center;
+}
+.sign-in .textSignUp {
+  color: #fff;
+  margin: 2rem 0;
+}
+
+.sign-in .textSignUp h1,
+.sign-in .text h2 {
+  color: #ffffff;
+  font-weight: bold;
+  padding-bottom: 1.5rem;
+}
+
+.Register {
+  text-decoration: none;
+  color: #ffffff;
+}
+.Register:hover {
+  color: #948e8e;
+}
+.form-login {
+  padding-top: 7rem;
+  width: 40%;
+}
+.form-login form {
+  background-color: #fff;
+  opacity: 0.8;
+}
+.form-floating {
+  overflow: hidden;
+}
+.form-login form h1 {
+  color: #000000;
+}
+.form-login form .btn {
+  color: #fff;
+  font-weight: 500;
+}
+.form-login form .btn:hover {
+  box-shadow: 0 4px 20px 0 #4d47c3;
+}
+#floatingInput,
+#floatingPassword,
+#floatingUserName,
+#floatingPhoneNumber {
+  background: #ffffff;
+}
+label {
+  color: #064080;
+}
+.Forgot-password a {
+  color: #000000;
+  text-decoration: none;
+}
+textarea{
+  height: 5rem;
+  border-radius: 1rem;
+}
+::-webkit-file-upload-button {
+  background: #064080;
+  color: #fff;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  height: 2.5rem;
+}
+@media (max-width: 768px) {
+  .edit {
+    margin: 10rem 0;
+  }
+  .sign-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+  }
+  .sign-in .text {
+    margin-top: 7rem;
+  }
+  .form-login {
+    width: 60%;
+    margin-bottom: 10rem;
+  }
+}

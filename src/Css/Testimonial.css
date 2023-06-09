@@ -1,0 +1,45 @@
+.sliderx{
+    background: #064080;
+    border: 1px solid #064080;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    height: 30rem;
+    padding: 50px 0;
+}
+.Carousel.Item{
+    display: flex;
+    flex-direction: column;
+}
+.sliderx img{
+    text-align: center;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 150px;
+}
+.sliderx .carousel{
+    background-color: aliceblue;
+    border-radius: .5rem;
+    margin: 40px auto;
+    padding-top: 1rem;
+    /* box-sizing: border-box; */
+    border: 1px solid #fff;
+}
+.sliderx .carousel-caption p{
+color: #212121;
+line-height: 1.7rem;
+}
+.sliderx .carousel-caption span{
+    color: #064080;
+    display: block;
+    margin: 1rem 0;
+    text-transform: capitalize;
+
+}
+.carousel-indicators [data-bs-target] {
+    height: 1rem;
+    background-color: #212121 !important;
+    color: #212121;
+}
+

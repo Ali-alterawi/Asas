@@ -1,0 +1,36 @@
+.SliderService-bg {
+  background-image: url(../images/bg2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 40rem;
+}
+.SliderText h3 {
+  color: #ffcc00;
+  font-family: "Outfit", Sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+.SliderText h1 {
+  color: #ffffff;
+  font-family: "Outfit", Sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}

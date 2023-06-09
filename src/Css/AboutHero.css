@@ -1,0 +1,28 @@
+.bg-img-about {
+  background-image: url(../images/bgAbout.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 18rem;
+}
+.BriefAbout-text {
+  width: 80%;
+}
+.BriefAbout-text h2{
+  color:#064080 ;
+}
+@media (max-width: 991px){
+  .pre-BriefAbout-text{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+ 
+}
+@media (max-width: 768px){
+  .about-img img{
+    text-align: center;
+    height: 80%;
+    width: 80%;
+  }}

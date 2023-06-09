@@ -1,0 +1,35 @@
+.main-btn {
+  background-color: #064080;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+.main-btn:hover {
+  box-shadow: 0 4px 20px 0 #064080;
+  transform: scale(1.1);
+}
+.navbar-brand {
+  font-weight: 500;
+}
+.navbar .navbar-nav .nav-link {
+  color: #064080;
+  font-weight: 500;
+}
+
+.navbar .navbar-nav .nav-item .active:hover {
+  background-color: #064080;
+  border-radius: 20px;
+  color: azure;
+}
+
+.navbar .navbar-toggler,
+.navbar .navbar-toggler:hover {
+  color: #064080;
+  font-size: 25px;
+  border-color: #064080;
+}
+.container .row .col-6 h5 {
+  color: #064080;
+}
+.fa-2x{
+  color: #064080;
+}
