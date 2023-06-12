@@ -3,7 +3,6 @@ import {
   MDBCard,
   MDBCardBody,
   MDBCardTitle,
-  MDBCardText,
   MDBCardImage,
   MDBRipple,
 } from "mdb-react-ui-kit";
@@ -50,6 +49,7 @@ const CompletedOrder = () => {
                 src={logo}
                 fluid
                 alt="..."
+                className="pt-3"
               />
               <Link>
                 <div
@@ -73,6 +73,7 @@ const CompletedOrder = () => {
                 src={logo}
                 fluid
                 alt="..."
+                className="pt-3"
               />
               <Link>
                 <div
@@ -96,6 +97,7 @@ const CompletedOrder = () => {
                 src={logo}
                 fluid
                 alt="..."
+                className="pt-3"
               />
               <Link>
                 <div
@@ -119,52 +121,7 @@ const CompletedOrder = () => {
                 src={logo}
                 fluid
                 alt="..."
-              />
-              <Link>
-                <div
-                  className="mask"
-                  style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                ></div>
-              </Link>
-            </MDBRipple>
-            <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
-              <button className=" calculator mt-3">Download DWG</button>
-            </MDBCardBody>
-          </MDBCard>
-          <MDBCard className="rounded ms-3 mb-5"> 
-            <MDBRipple
-              rippleColor="light"
-              rippleTag="div"
-              className="bg-image hover-overlay "
-            >
-              <MDBCardImage
-                src={logo}
-                fluid
-                alt="..."
-              />
-              <Link>
-                <div
-                  className="mask"
-                  style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                ></div>
-              </Link>
-            </MDBRipple>
-            <MDBCardBody>
-              <MDBCardTitle>Card title</MDBCardTitle>
-              <button className=" calculator mt-3">Download DWG</button>
-            </MDBCardBody>
-          </MDBCard>
-          <MDBCard className="rounded ms-3 mb-5"> 
-            <MDBRipple
-              rippleColor="light"
-              rippleTag="div"
-              className="bg-image hover-overlay "
-            >
-              <MDBCardImage
-                src={logo}
-                fluid
-                alt="..."
+                className="pt-3"
               />
               <Link>
                 <div

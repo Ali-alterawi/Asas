@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import OrderItems from "./OrderItems";
+import SettingsUser from "./SettingsUser";
+import CompletedOrder from "./CompletedOrder";
+import ProfileEdit from "./ProfileEdit";
+import Profile from "./Profile";
 
-const Main = ({children}) => {
-  return (
-    <div className='Main'>
-            {children}
-        </div>
-  )
-}
+const Main = () => {
+  return(
+   <div className="Main">
+    <OrderItems/>
+    <SettingsUser/>
+<CompletedOrder/>
+<ProfileEdit/>
+<Profile/>
+  </div>
+)};
 
-export default Main
+export default Main;

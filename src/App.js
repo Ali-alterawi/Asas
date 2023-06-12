@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Restore from "./pages/Restore";
 import PartnerPage from "./pages/PartnerPage";
 import ProfileCustomer from "./pages/ProfileCustomer";
+import ProfileOffice from "./pages/ProfileOffice";
 import NoPage from "./pages/NoPage";
 import OrderForm from "./components/ProfileUser/OrderForm";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -28,6 +29,7 @@ function App() {
           <Route element={<Restore />} path="Restore" />
           <Route element={<PartnerPage />} path="PartnerPage" />
           <Route element={<ProfileCustomer />} path="ProfileCustomer" />
+          <Route element={<ProfileOffice />} path="ProfileOffice" />
           <Route element={<OrderForm />} path="OrderForm" />
           <Route element={<NoPage />} path="*" />
         </Routes>

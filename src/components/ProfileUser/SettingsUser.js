@@ -2,22 +2,9 @@ import React from "react";
 import { MDBCheckbox } from "mdb-react-ui-kit";
 const SettingsUser = () => {
   return (
-    // <div>
-    //   <div class="spacing after__is-24">
-    //     <label class="label">Email</label>
-    //     <div class="title-group spacing after__is-24">
-    //       <h6>Company News</h6>
-    //       <p class="small-text">
-    //         I'm ok to receive interesting home improvement insights from Ergeon
-    //         over email
-    //       </p>
-    //     </div>
-    //   </div>
-    //   <span class="checkbox-checkmark"></span>
-    // </div>
-    <><h2 className="p-3">Settings</h2>
-    <div></div>
-      
+    <>
+      <h2 className="p-3">Settings</h2>
+
       <div
         className="border border rounded-4 my-3 p-5"
         style={{ backgroundColor: "#F0F0F7" }}
@@ -37,12 +24,12 @@ const SettingsUser = () => {
           <div>
             <h6>Company News</h6>
             <p class="small-text">
-              I'm ok to receive interesting exclusive offers from
-              Asas over email
+              I'm ok to receive interesting exclusive offers from Asas over
+              email
             </p>
           </div>
-          
-        </div><button class="calculator" type="button" >
+        </div>
+        <button class="calculator" type="button">
           Accept
         </button>
       </div>

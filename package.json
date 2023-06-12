@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@react-spring/web": "^9.7.2",
@@ -12,6 +13,7 @@
     "bootstrap": "^5.3.0-alpha3",
     "bootstrap-icons": "^1.10.5",
     "lightbox.js-react": "^0.6.4",
+    "mdb-react-ui-kit": "^6.1.0",
     "mdi": "^2.2.43",
     "mdi-react": "^9.2.0",
     "react": "^18.2.0",

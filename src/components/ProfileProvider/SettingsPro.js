@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CaretUp, Gear} from "react-bootstrap-icons";
-const Settings = () => {
+const SettingsPro = () => {
   const [elementsVisible, setElementsVisible] = useState(true);
 
   const toggleElementsVisibility = () => {
@@ -40,4 +40,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsPro;

@@ -7,6 +7,15 @@ const OrderForm = () => {
   const [secondSelectOptions, setSecondSelectOptions] = useState([]);
   const [thirdSelectValue, setThirdSelectValue] = useState([]);
   const [thirdSelectOptions, setThirdSelectOptions] = useState([]);
+  const [number, setNumber] = useState("");
+  const [result, setResult] = useState("");
+
+  const handleInputChange = (e) => {
+    setNumber(e.target.value);
+    const multipliedResult = Number(number) * 2;
+    setResult(`total price is : ${multipliedResult}JOD`);
+    
+  };
 
   const handleFirstSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -82,7 +91,7 @@ const OrderForm = () => {
                   id="floatingUserName"
                   placeholder="Create User name"
                 />
-                <label for="floatingUserName">User Name:</label>
+                <label for="floatingUserName">Applicant's Name:</label>
               </div>
               <div class="form-floating mb-3">
                   <input
@@ -168,9 +177,11 @@ const OrderForm = () => {
                     class="form-control"
                     id="floatingUserName"
                     placeholder="50m^2"
+                    value={number} onChange={handleInputChange}
                   />
                   <label for="floatingUserName">Total Area Building:</label>
                 </div>
+                <p>{result}$</p>
               <label for="formFileMultiple2" class="form-label text-capitalize">
                 Upload Land Plan & Land Organization Chart :
               </label>

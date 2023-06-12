@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CalendarDate, CaretUp } from "react-bootstrap-icons";
 
-const Orders = () => {
+const OrdersPro = () => {
   
   const [elementsVisible, setElementsVisible] = useState(true);
 
@@ -38,4 +38,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrdersPro;
