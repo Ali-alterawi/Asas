@@ -12,7 +12,7 @@ const Hero = () => {
           <p className="mb-4">
             we provide all services you want to complete your projects from A-Z
           </p>
-          <button className="calculator">Calculator</button>
+          <button className="calculator">make a new Order</button>
         </div>
       </div>
       </div>

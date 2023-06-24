@@ -2,7 +2,8 @@ import React from "react";
 
 const ProfileEdit = () => {
   return (
-      <div>
+    <div className="Main Sidebar my-3 border rounded-4">
+      
         <form class="">
           <h1 class="my-4">Edit Profile</h1>
 

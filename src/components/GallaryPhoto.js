@@ -14,9 +14,9 @@ const GallaryPhoto = () => {
   return (
     <>
       <div className="container my-5">
-        <h1 className="font-bold text-lg text-center text-capitalize">our gallary</h1>
+        <h1 className="font-bold text-lg text-center text-capitalize">our previous projects</h1>
         <p className="mb-4 text-md text-center">
-          Click on an image below to open the photo.
+          Discover our projects by clicking on images
         </p>
         <SlideshowLightbox className="d-flex flex-row flex-wrap justify-content-center ">
           <img

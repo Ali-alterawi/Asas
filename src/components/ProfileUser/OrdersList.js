@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CalendarDate, CaretUp } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 const OrdersList = () => {
   
@@ -23,16 +24,12 @@ const OrdersList = () => {
             </span>
           </div>
         </div>
-        <div className="items">
-          {OrdersList.map(
-            (e) =>
-              elementsVisible && (
-                <div className="item" key={e}>
-                  {e}
-                </div>
-              )
-          )}
-        </div>
+        {elementsVisible && (
+        <div className="items d-flex flex-column">
+        
+          <Link className="text-black" to="OrderItems">Orders</Link>
+          <Link to="CompletedOrders">Completed Orders</Link>
+        </div>)}
       </div>
     </>
   );

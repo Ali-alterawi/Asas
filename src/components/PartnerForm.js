@@ -1,97 +1,103 @@
-import React from "react";
+import React,{useRef} from "react";
+
+import axios from "axios";
 
 const PartnerForm = () => {
+  const formRef = useRef(null);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      role: 0,
+      userName: event.target.elements.userName.value,
+      email: event.target.elements.email.value,
+      phone: event.target.elements.phone.value,
+      service: event.target.elements.service.value,
+      password: event.target.elements.phone.value,
+      message: event.target.elements.message.value,
+    };
+    try {
+      const res = await axios.post("http://localhost:8000/User", formData);
+      console.log("Form data sent successfully to server from react");
+      formRef.current.reset();
+    } catch (error) {
+      console.log("Error sending form from react:", error);
+    }
+  };
   return (
     <>
       <div className="Partner-bg">
         <div class="form-login mb-5  d-flex justify-content-center flex-column align-items-center">
-          <form class="shadow p-3 rounded-4 mb-5 opacity-100 form-P">
+          <form
+            class="shadow p-3 rounded-4 mb-5 opacity-100 form-P"
+            onSubmit={handleSubmit}
+            ref={formRef}
+          >
             <h4 class="py-3">If you would like to become part of us</h4>
             <div class="form-floating mb-3">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="floatingName"
                 placeholder="your name"
+                name="userName"
               />
-              <label for="floatingName">Company Name</label>
+              <label htmlFor="floatingName">Company Name</label>
             </div>
             <div class="form-floating mb-3">
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 id="floatingInput"
                 placeholder="name@example.com"
+                name="email"
               />
-              <label for="floatingInput">Email address</label>
+              <label htmlFor="floatingInput">Email address</label>
             </div>
             <div class="form-floating mb-4">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="floatingPhone"
                 placeholder="079********"
+                name="phone"
               />
-              <label for="floatingPhone">Phone number</label>
+              <label htmlFor="floatingPhone">Phone number</label>
             </div>
-            <label for="" class="h4">
-              Services:
-            </label>
-            <div class="form-check">
+            <div class="form-floating mb-3">
               <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault1"
-              />
-              <label class="form-check-label" for="flexRadioDefault1">
-                Quantity serving
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                checked
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Engineering Design
-              </label>
-            </div>
-            <div class="form-check mb-5">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="flexRadioDefault"
-                id="flexRadioDefault2"
-                checked
-              />
-              <label class="form-check-label" for="flexRadioDefault2">
-                Interior Design
-              </label>
-            </div>
-            <div class="mb-3">
-              <label for="formFileMultiple" class="form-label text-capitalize">
-              Upload commercial register or any documentation that supports your application:
-              </label>
-              <input
+                type="password"
                 class="form-control"
-                type="file"
-                id="formFileMultiple"
-                multiple
+                id="floatingPassword"
+                placeholder="Password"
+                name="password"
               />
+              <label htmlFor="floatingPassword">Password</label>
+            </div>
+            <div>
+              <select
+                id="service"
+                label="service"
+                className="form-control mb-5"
+                name="service"
+              >
+                <option>Services: </option>
+                <option> Engineering Design</option>
+                <option> Quantity serving </option>
+                <option> Interior Design </option>
+              </select>
             </div>
             {/* <!-- text area --> */}
-            <div class="input-group mb-5">
-              <span class="input-group-text">Message</span>
+            <div className="input-group mb-5">
+              <span className="input-group-text">Message</span>
               <textarea
-                class="form-control"
+                className="form-control"
                 aria-label="With textarea"
                 placeholder="A few words about your company/office"
+                name="message"
               ></textarea>
             </div>
+
             <button class="w-100 calculator" type="submit">
               submit
             </button>

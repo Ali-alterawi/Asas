@@ -1,14 +1,14 @@
 import React from 'react'
 import ProviderPic from './ProviderPic'
-import OrdersPro from './OrdersPro'
-import SettingsPro from './SettingsPro'
+import OrdersPro from './OrdersListPro'
+import SettingsListPro from './SettingsListPro'
 
 const SidebarPro = () => {
   return (
-    <div>
+    <div className=" my-3 border rounded-4">
         <ProviderPic/>
         <OrdersPro/>
-        <SettingsPro/>
+        <SettingsListPro/>
     </div>
   )
 }

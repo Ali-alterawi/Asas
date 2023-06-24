@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrderItem = () => {
   return (
@@ -8,8 +9,8 @@ const OrderItem = () => {
           <div className="d-flex flex-row justify-content-between align-items-baseline">
             <h5 className="fw-bold ms-4">Engineering Design</h5>
             <div className="d-flex flex-row align-items-center">
-              <button className="me-3 calculator mt-3">Payment</button>
-              <button className="calculator mt-3 me-2">See Details</button>
+             <Link to="/PaymentGate" ><button className="me-3 calculator mt-3">Payment</button></Link>
+             <Link to="/OrderDetails" ><button className="calculator mt-3 me-2">See Details</button></Link>
             </div>
           </div>
         </div>

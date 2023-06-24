@@ -14,8 +14,10 @@
   color: #064080;
   font-weight: 500;
 }
-
-.navbar .navbar-nav .nav-item .active:hover {
+.nav-item div .nav-link:hover{
+  padding-left: 1rem;
+}
+.navbar .navbar-nav .nav-item .active:hover ,  .nav-item div .nav-link:hover {
   background-color: #064080;
   border-radius: 20px;
   color: azure;

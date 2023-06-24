@@ -4,7 +4,7 @@ const ProfilePro = () => {
   return (
     <div>
       {" "}
-      <div className="ms-3">
+      <div className="Main Sidebar my-3 border rounded-4">
         <div className="d-flex flex-row justify-content-between ">
           <h2 className="p-3 ms-3">Profile</h2>
           <button className="calculator mt-2">Edit</button>

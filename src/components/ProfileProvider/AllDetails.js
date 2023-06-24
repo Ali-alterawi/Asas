@@ -1,10 +1,9 @@
 import React from "react";
-import AllDetails from "../ProfileProvider/AllDetails";
 
-const OrderDetails = () => {
+const AllDetails = () => {
   return (
     <>
-    <div className="Main Sidebar my-3">
+    <div className="Main Sidebar my-3 border rounded-4">
       <div class="card text-dark bg-light my-3" style={{ maxWidth: "18rem;" }}>
         <div class="card-header">Details</div>
         <div class="card-body">
@@ -33,10 +32,31 @@ const OrderDetails = () => {
           <h5 class="card-title">Order Stauts:</h5>
           <p class="card-text">Completed</p>
         </div>
+        <div>
+          <form className="shadow p-3 rounded-4 mb-5 opacity-100 form-P">
+            <label for="formFileMultiple2" class="form-label text-capitalize">
+              Upload a file
+            </label>
+            <input
+              class="form-control"
+              type="file"
+              id="formFileMultiple2"
+              multiple
+            />
+            <div class="d-flex justify-content-center py-3">
+              <input
+                type="submit"
+                value="Submit"
+                id="submit"
+                className="w-100 calculator"
+              />
+            </div>
+          </form>
+        </div>
       </div>
       </div>
     </>
   );
 };
 
-export default OrderDetails;
+export default AllDetails;

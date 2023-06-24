@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CaretUp, Gear} from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-const Settings = () => {
+const SettingsListPro = () => {
   const [elementsVisible, setElementsVisible] = useState(true);
 
   const toggleElementsVisibility = () => {
@@ -21,17 +21,24 @@ const Settings = () => {
             </span>
           </div>
         </div>
+        <div className="items" >
         {elementsVisible && (
-        <div className="items d-flex flex-column">
-        
-          <Link className="text-black" to="Profile">Profile</Link>
-          <Link to="SettingsUser">Settings Orders</Link>
-          <Link to="Soon">Chat</Link>
-          <Link to="Main">Logout</Link>
-        </div>)}
+            <div className="items d-flex flex-column">
+              <Link className="text-black text-decoration-none mb-2" to="ProfilePro">
+              Profile
+              </Link>
+              <Link className="text-black text-decoration-none mb-2" to="SettingsPro">
+              Settings
+              </Link>
+              <Link className="text-black text-decoration-none mb-2" to="">
+              Logout
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default Settings;
+export default SettingsListPro;

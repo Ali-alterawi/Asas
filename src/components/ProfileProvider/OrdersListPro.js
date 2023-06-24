@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { CalendarDate, CaretUp } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
-const OrdersPro = () => {
-  
+const OrdersListPro = () => {
   const [elementsVisible, setElementsVisible] = useState(true);
 
   const toggleElementsVisibility = () => {
     setElementsVisible(!elementsVisible);
   };
-  const OrdersList = ["Orders", "Completed Orders"];
   return (
     <>
       <div className="OrdersMain">
@@ -24,13 +23,18 @@ const OrdersPro = () => {
           </div>
         </div>
         <div className="items">
-          {OrdersList.map(
-            (e) =>
-              elementsVisible && (
-                <div className="item" key={e}>
-                  {e}
-                </div>
-              )
+          {elementsVisible && (
+            <div className="items d-flex flex-column">
+              <Link className="text-black text-decoration-none mb-2" to="OrderPro">
+                All Orders
+              </Link>
+              <Link className="text-black text-decoration-none mb-2" to="NewOrdersPro">
+                New Orders
+              </Link>
+              <Link className="text-black text-decoration-none mb-2" to="CompletedOrdersPro">
+                Completed Orders
+              </Link>
+            </div>
           )}
         </div>
       </div>
@@ -38,4 +42,4 @@ const OrdersPro = () => {
   );
 };
 
-export default OrdersPro;
+export default OrdersListPro;

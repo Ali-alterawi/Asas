@@ -1,7 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LogInForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:8000/loginUser", {
+        email,
+        password,
+      });
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+
+      // Redirect to the home page or any other desired route
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="SliderService-bg">
@@ -19,7 +42,10 @@ const LogInForm = () => {
               </h5>
             </div>
             <div class="form-login">
-            <form class="shadow p-3 rounded-4 mb-5 ">
+              <form
+                class="shadow p-3 rounded-4 mb-5"
+                onSubmit={handleSubmit}
+              >
                 <h1 class="mb-4 fw-normal">Sign in</h1>
 
                 <div class="form-floating mb-5">
@@ -28,6 +54,8 @@ const LogInForm = () => {
                     class="form-control"
                     id="floatingInput"
                     placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   <label for="floatingInput">Email address</label>
                 </div>
@@ -37,6 +65,8 @@ const LogInForm = () => {
                     class="form-control"
                     id="floatingPassword"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <label for="floatingPassword">Password</label>
                 </div>
@@ -47,7 +77,8 @@ const LogInForm = () => {
 
                   <div class="checkbox my-3">
                     <label>
-                      <input type="checkbox" value="remember-me" /> Remember me
+                      <input type="checkbox" value="remember-me" /> Remember
+                      me
                     </label>
                   </div>
                 </div>
