@@ -3,8 +3,10 @@ import img1 from '../images/img1.png';
 import '../Css/NavBar.css';
 import { Link } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   // Check if token exists in local storage
   const token = localStorage.getItem('token');
 
@@ -13,6 +15,7 @@ const NavBar = () => {
     // Clear token from local storage
     localStorage.removeItem('token');
     // Refresh the page to reset the state
+    navigate("/");
     window.location.reload();
   };
 

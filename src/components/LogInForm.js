@@ -15,8 +15,8 @@ const LogInForm = () => {
         email,
         password,
       });
-      const token = response.data.token;
-      localStorage.setItem("token", token);
+      const token = await response.data.token;
+       localStorage.setItem("token", token);
 
       // Redirect to the home page or any other desired route
       navigate("/");
@@ -27,7 +27,7 @@ const LogInForm = () => {
 
   return (
     <>
-      <div className="SliderService-bg">
+      <div className="Partner-bg">
         <div class="container edit">
           <div class="sign-in">
             <div class="textSignUp">

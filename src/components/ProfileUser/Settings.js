@@ -24,10 +24,10 @@ const Settings = () => {
         {elementsVisible && (
         <div className="items d-flex flex-column">
         
-          <Link className="text-black" to="Profile">Profile</Link>
-          <Link to="SettingsUser">Settings Orders</Link>
-          <Link to="Soon">Chat</Link>
-          <Link to="Main">Logout</Link>
+          <Link className="text-black text-decoration-none" to="Profile">Profile</Link>
+          <Link className="text-black text-decoration-none" to="SettingsUser">Settings Orders</Link>
+          <Link className="text-black text-decoration-none" to="Soon">Contact admin</Link>
+          <Link className="text-black text-decoration-none" to="Main">Logout</Link>
         </div>)}
       </div>
     </>

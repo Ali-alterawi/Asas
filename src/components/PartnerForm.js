@@ -13,7 +13,7 @@ const PartnerForm = () => {
       email: event.target.elements.email.value,
       phone: event.target.elements.phone.value,
       service: event.target.elements.service.value,
-      password: event.target.elements.phone.value,
+      password: event.target.elements.password.value,
       message: event.target.elements.message.value,
     };
     try {
@@ -82,9 +82,9 @@ const PartnerForm = () => {
                 name="service"
               >
                 <option>Services: </option>
-                <option> Engineering Design</option>
-                <option> Quantity serving </option>
-                <option> Interior Design </option>
+                <option>Engineering design</option>
+                <option>Quantity serving</option>
+                <option>Interior design</option>
               </select>
             </div>
             {/* <!-- text area --> */}

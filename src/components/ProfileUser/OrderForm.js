@@ -1,18 +1,21 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 
-const OrderForm = () => {
+const OrderForm = ({ UserId }) => {
+  console.log(UserId);
   const [firstSelectValue, setFirstSelectValue] = useState("");
   const [secondSelectValue, setSecondSelectValue] = useState("");
   const [secondSelectOptions, setSecondSelectOptions] = useState([]);
   const [thirdSelectValue, setThirdSelectValue] = useState("");
   const [thirdSelectOptions, setThirdSelectOptions] = useState([]);
+  const [totalAreaBuilding, setTotalAreaBuilding] = useState("");
   const [number, setNumber] = useState("");
   const formRef = useRef(null);
-  const fileInputRef = useRef(null); // Ref for file input
+  // const fileInputRef = useRef(null); // Ref for file input
 
-  const handleInputChange = (e) => {
-    setNumber(`The Price is ${Number(e.target.value) * 2}`);
+  const handleInputChange = (event) => {
+    setNumber(`The Price is ${Number(event.target.value) * 2}`);
+    handleChange(event);
   };
 
   const handleFirstSelectChange = (event) => {
@@ -20,7 +23,12 @@ const OrderForm = () => {
     setFirstSelectValue(selectedValue);
 
     const optionsMap = {
-      "Engineering design": ["KD ENGINEERING", "BLUEPRINT", "BBK", "360ENGINEERING"],
+      "Engineering design": [
+        "KD ENGINEERING",
+        "BLUEPRINT",
+        "BBK",
+        "360ENGINEERING",
+      ],
       "Quantity serving": [
         "Real estate company",
         "Manarah contracting",
@@ -67,40 +75,85 @@ const OrderForm = () => {
     const selectedValue = event.target.value;
     setThirdSelectValue(selectedValue);
   };
+  const handleTotalAreaBuildingChange = (event) => {
+    const value = event.target.value;
+    setTotalAreaBuilding(value);
+    handleChange(event); // Call the existing handleChange function
+  };
+  const [formData, setFormData] = useState({
+    UserId: UserId,
+    applicantName: "",
+    email: "",
+    mobileNumber: "",
+    location: "",
+    services: "",
+    serviceProvider: "",
+    kindOfService: "",
+    projectdescription: "",
+  });
+  // const [images, setImages] = useState([]);
+  const [projects, setProjects] = useState([]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  console.log(formData);
 
-    const formData = {
-      applicantName: event.target.elements.applicantName.value,
-      mobileNumber: event.target.elements.mobileNumber.value,
-      email: event.target.elements.email.value,
-      location: event.target.elements.location.value,
-      services: event.target.elements.services.value,
-      serviceProvider: event.target.elements.serviceProvider.value,
-      kindOfService: event.target.elements.kindOfService.value,
-      projectDescription: event.target.elements.projectDescription.value,
-      file: fileInputRef.current.files[0],
-      number:number
+  const handleReportsChange = (event) => {
+    setProjects([...event.target.files]);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
-  
+
     console.log(formData);
     try {
-      await axios.post("http://localhost:8000/order", formData);
-      console.log("Form data sent successfully to server from react");
-      formRef.current.reset();
+      const formDataWithFiles = new FormData();
+      formDataWithFiles.append("userId", formData.UserId);
+      formDataWithFiles.append("applicantName", formData.applicantName);
+      formDataWithFiles.append("email", formData.email);
+      formDataWithFiles.append("mobileNumber", formData.mobileNumber);
+      formDataWithFiles.append("location", formData.location);
+      formDataWithFiles.append("services", formData.services);
+      formDataWithFiles.append("serviceProvider", formData.serviceProvider);
+      formDataWithFiles.append("kindOfService", formData.kindOfService);
+      formDataWithFiles.append(
+        "projectDescription",
+        formData.projectdescription
+      );
+      formDataWithFiles.append("totalAreaBuilding", totalAreaBuilding);
+      formDataWithFiles.append("number", number);
+
+      // images.forEach((file) => {
+      //   formDataWithFiles.append("images", file);
+      // });
+      projects.forEach((file) => {
+        formDataWithFiles.append("projects", file);
+      });
+      console.log(formData);
+      const response = await axios.post(
+        "http://localhost:8000/order",
+        formDataWithFiles
+        // config
+      );
+
+      console.log("Data sent successfully");
     } catch (error) {
-      console.log("Error sending form from react:", error);
+      console.error("Error:", error.message);
     }
   };
 
-
   return (
     <>
-       <div className="Main Sidebar my-3 border rounded-4">
-        <h2 className="p-3">make a new order</h2>
+      <div className="Main Sidebar my-3 border rounded-4">
+        <h2 className="p-3">Make a new order</h2>
         <form
-          className="shadow p-3 rounded-4 mb-5 opacity-100 form-P"
+          className="shadow p-3 rounded-4 mb-5 opacity-100 form-P mx-3"
           style={{ backgroundColor: "#F0F0F7" }}
           onSubmit={handleSubmit}
           ref={formRef}
@@ -121,6 +174,7 @@ const OrderForm = () => {
                 id="floatingUserName"
                 placeholder="Create User name"
                 name="applicantName"
+                onChange={handleChange}
               />
               <label for="floatingUserName">Applicant's Name:</label>
             </div>
@@ -131,6 +185,7 @@ const OrderForm = () => {
                 id="floatingUserName"
                 placeholder="00962 ** *** *** *"
                 name="mobileNumber"
+                onChange={handleChange}
               />
               <label for="floatingUserName">Mobile number:</label>
             </div>
@@ -141,6 +196,7 @@ const OrderForm = () => {
                 id="floatingInput"
                 placeholder="name@example.com"
                 name="email"
+                onChange={handleChange}
               />
               <label for="floatingInput">E-mail:</label>
             </div>
@@ -151,6 +207,7 @@ const OrderForm = () => {
                 id="floatingInput"
                 placeholder="Jordan / Amman"
                 name="location"
+                onChange={handleChange}
               />
               <label for="floatingInput">Location:</label>
             </div>
@@ -161,7 +218,10 @@ const OrderForm = () => {
             <select
               id="firstSelect"
               value={firstSelectValue}
-              onChange={handleFirstSelectChange}
+              onChange={(event) => {
+                handleFirstSelectChange(event);
+                handleChange(event);
+              }}
               className="w-100 form-control my-3"
               name="services"
             >
@@ -175,7 +235,10 @@ const OrderForm = () => {
             <select
               id="secondSelect"
               value={secondSelectValue}
-              onChange={handleSecondSelectChange}
+              onChange={(event) => {
+                handleSecondSelectChange(event);
+                handleChange(event);
+              }}
               className="w-100 form-control my-3"
               name="serviceProvider"
             >
@@ -189,7 +252,10 @@ const OrderForm = () => {
             <select
               id="thirdSelect"
               value={thirdSelectValue}
-              onChange={handleThirdSelectChange}
+              onChange={(event) => {
+                handleThirdSelectChange(event);
+                handleChange(event);
+              }}
               className="w-100 form-control my-3"
               name="kindOfService"
             >
@@ -209,6 +275,7 @@ const OrderForm = () => {
               placeholder="        ..."
               className="w-100 form-control"
               name="projectDescription"
+              onChange={handleChange}
             ></textarea>
             <div class="form-floating my-3">
               <input
@@ -216,31 +283,41 @@ const OrderForm = () => {
                 class="form-control"
                 id="floatingUserName"
                 placeholder="50m^2"
-                onChange={handleInputChange}
+                onChange={(event) => {
+                  handleInputChange(event);
+                  handleChange(event);
+                  handleTotalAreaBuildingChange(event); // Add this line
+                }}
                 name="totalAreaBuilding"
               />
               <label for="floatingUserName">Total Area Building:</label>
             </div>
             <p>{number}$</p>
-            <label htmlFor="formFileMultiple2" className="form-label text-capitalize">
-            Upload Land Plan & Land Organization Chart:
-          </label>
-          <input
-  className="form-control"
-  type="file"
-  id="formFileMultiple2"
-  name="files"
-  ref={fileInputRef} // Add this line
-/>
-
-          <div className="d-flex justify-content-center py-3">
+            <label
+              htmlFor="formFileMultiple2"
+              className="form-label text-capitalize"
+            >
+              Upload Land Plan & Land Organization Chart:
+            </label>
             <input
-              type="submit"
-              value="Submit"
-              id="submit"
-              className="w-100 calculator"
+              className="form-control"
+              type="file"
+              id="formFileMultiple2"
+              // name="files"
+              name="file"
+              multiple
+              onChange={handleReportsChange}
+              // ref={fileInputRef} // Add this line
             />
-          </div>
+
+            <div className="d-flex justify-content-center py-3">
+              <input
+                type="submit"
+                value="Submit"
+                id="submit"
+                className="w-100 calculator"
+              />
+            </div>
           </div>
         </form>
       </div>

@@ -27,7 +27,7 @@ const SignUpForm = () => {
   };
   return (
     <>
-      <div className="SliderService-bg">
+      <div className="Partner-bg">
         <div class="container edit">
           <div class="sign-in">
             <div class="textSignUp">

@@ -29,11 +29,54 @@ import SettingsPro from "./components/ProfileProvider/SettingsPro";
 import AllDetails from "./components/ProfileProvider/AllDetails";
 import PaymentGate from "./components/ProfileUser/PaymentGate";
 import OrderDetails from "./components/ProfileUser/OrderDetails";
-
+import axios from "axios";
 function App() {
-  const [hideRouterGuset, setHideRouterGuset] = useState(true);
-  const [hideRouterUser, setHideRouterUser] = useState(false);
+  const [hideRouterGuset, setHideRouterGuset] = useState( false);
+  const [hideRouterUser, setHideRouterUser] = useState(true);
   const [hideRouterPro, setHideRouterPro] = useState(true);
+  const [userData, setUserData] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("token") || false);
+  const [userId0 ,setUserId] = useState()
+
+  
+  const fetchProtectedData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await axios.get("http://localhost:8000/Verify_token", {
+          headers: {
+            Authorization: token,
+          },
+        });
+        let x = [];
+        setUserId(response.data.user.id)
+        // console.log(response.data);
+        // console.log(response.data.user.id);
+        if (response.data.user.role === 0) {
+          x = [true, false, true];
+        } else if (response.data.user.role === 2) {
+          x = [true, true, false];
+          console.log(x);
+        } else {
+          x = [false, true, true];
+        }
+        console.log(x);
+        setHideRouterUser(x[0]);
+        setHideRouterPro(x[1]);
+        setHideRouterGuset(x[2]);
+        // updateRouts(x);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      console.log(false);
+    }
+  };
+
+  if(localStorage.token != null){   
+    fetchProtectedData()
+  }
 
   //-----------------------------User Router-------------------------------//
   const AppRouterGuset = () => {
@@ -49,9 +92,6 @@ function App() {
           <Route element={<SignUp />} path="SignUp" />
           <Route element={<Restore />} path="Restore" />
           <Route element={<PartnerPage />} path="PartnerPage" />
-          <Route element={<ProfileCustomer />} path="ProfileCustomer" />
-          <Route element={<ProfileOffice />} path="ProfileOffice" />
-          <Route element={<OrderForm />} path="OrderForm" />
           <Route element={<NoPage />} path="*" />
         </Routes>
         <Footer />
@@ -71,14 +111,14 @@ function App() {
             </div>
             <div className="col-lg-8 col-md-12">
               <Routes>
-                <Route element={<OrderItems />} path="/" />
-                <Route element={<OrderItems />} path="OrderItems" />
+                <Route element={<OrderItems UserId={userId0} />} path="/" />
+                <Route element={<OrderItems UserId={userId0} />} path="OrderItems" />
                 <Route element={<CompletedOrders />} path="CompletedOrders" />
                 <Route element={<SettingsUser />} path="SettingsUser" />
                 <Route element={<Profile />} path="Profile" />
-                <Route element={<OrderForm />} path="OrderForm" />
+                <Route element={<OrderForm UserId={userId0} />} path="OrderForm" />
                 <Route element={<PaymentGate />} path="PaymentGate" />
-                <Route element={<OrderDetails />} path="OrderDetails" />
+                <Route element={<OrderDetails UserId={userId0}/>} path="OrderDetails/:idOrder" />
                 <Route element={<Main />} path="Main" />
               </Routes>
             </div>

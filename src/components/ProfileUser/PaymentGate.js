@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -8,8 +8,16 @@ import {
   MDBInput,
   MDBRow,
 } from "mdb-react-ui-kit";
+import { Button, Modal } from 'react-bootstrap';
 
 export default function PaymentGate() {
+  const [newCard, setNewCard] = useState({
+    cardholderName: "",
+    cardNumber: "",
+    expire: "",
+    cvv: "",
+  });
+
   const totalAmountDue = "$8245";
   const savedCards = [
     {
@@ -21,11 +29,43 @@ export default function PaymentGate() {
       cardNumber: "**** **** **** 4296",
     },
   ];
-  const newCard = {
-    cardholderName: "Anna Doe",
-    cardNumber: "1234 5678 1234 5678",
-    expire: "MM/YYYY",
-    cvv: "CVV",
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewCard({ ...newCard, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Perform validation here before submitting the form
+
+    // Example validation for cardholder name
+    if (!newCard.cardholderName) {
+      alert("Please enter the cardholder's name");
+      return;
+    }
+
+    // Example validation for card number
+    if (!newCard.cardNumber) {
+      alert("Please enter the card number");
+      return;
+    }
+
+    // Example validation for expiration date
+    if (!newCard.expire) {
+      alert("Please enter the expiration date");
+      return;
+    }
+
+    // Example validation for CVV
+    if (!newCard.cvv) {
+      alert("Please enter the CVV");
+      return;
+    }
+
+    // Form is valid, submit the form
+    console.log("Form submitted:", newCard);
   };
 
   return (
@@ -34,7 +74,7 @@ export default function PaymentGate() {
       fluid
       style={{
         backgroundImage:
-          "url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp)",
+          "url(https://mdbcdn.b-cdn.net/img/Photos/Others/background4.webp)",
       }}
     >
       <MDBRow className="d-flex justify-content-center">
@@ -48,67 +88,60 @@ export default function PaymentGate() {
                 <p className="mb-1 small text-primary">Total amount due</p>
                 <h6 className="mb-0 text-primary">{totalAmountDue}</h6>
               </div>
-              <p className="fw-bold mb-4 pb-2">Saved cards:</p>
-              {savedCards.map((card, index) => (
-                <div
-                  key={index}
-                  className="d-flex flex-row align-items-center mb-4 pb-1"
-                >
-                  <img className="img-fluid" src={card.logo} alt="" />
-                  <div className="flex-fill mx-3">
-                    <div className="form-outline">
-                      <MDBInput
-                        label="Card Number"
-                        id={`form${index + 1}`}
-                        type="text"
-                        size="lg"
-                        value={card.cardNumber}
-                      />
-                    </div>
-                  </div>
-                  <a href="#!">Remove card</a>
-                </div>
-              ))}
-              <p className="fw-bold mb-4">Add new card:</p>
-              <MDBInput
-                label="Cardholder's Name"
-                id="form3"
-                type="text"
-                size="lg"
-                value={newCard.cardholderName}
-              />
-              <MDBRow className="my-4">
-                <MDBCol size="7">
-                  <MDBInput
-                    label="Card Number"
-                    id="form4"
-                    type="text"
-                    size="lg"
-                    value={newCard.cardNumber}
-                  />
-                </MDBCol>
-                <MDBCol size="3">
-                  <MDBInput
-                    label="Expire"
-                    id="form5"
-                    type="number"
-                    size="lg"
-                    placeholder={newCard.expire}
-                  />
-                </MDBCol>
-                <MDBCol size="2">
-                  <MDBInput
-                    label="CVV"
-                    id="form6"
-                    type="number"
-                    size="lg"
-                    placeholder={newCard.cvv}
-                  />
-                </MDBCol>
-              </MDBRow>
-              <MDBBtn color="success" size="lg" block>
-                Add card
-              </MDBBtn>
+              <p className="fw-bold mb-4">Please enter card details:</p>
+              <form onSubmit={handleSubmit}>
+                <MDBInput
+                  label="Cardholder's Name"
+                  id="form3"
+                  type="text"
+                  size="lg"
+                  name="cardholderName"
+                  value={newCard.cardholderName}
+                  onChange={handleInputChange}
+                  required
+                />
+                <MDBRow className="my-4">
+                  <MDBCol size="7">
+                    <MDBInput
+                      label="Card Number"
+                      id="form4"
+                      type="text"
+                      size="lg"
+                      name="cardNumber"
+                      value={newCard.cardNumber}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </MDBCol>
+                  <MDBCol size="3">
+                    <MDBInput
+                      label="Expire"
+                      id="form5"
+                      type="number"
+                      size="lg"
+                      name="expire"
+                      value={newCard.expire}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </MDBCol>
+                  <MDBCol size="2">
+                    <MDBInput
+                      label="CVV"
+                      id="form6"
+                      type="number"
+                      size="lg"
+                      name="cvv"
+                      value={newCard.cvv}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </MDBCol>
+                </MDBRow>
+                <MDBBtn color="primary" size="lg" block type="submit">
+                  PAY
+                </MDBBtn>
+              </form>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

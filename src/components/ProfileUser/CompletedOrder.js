@@ -20,7 +20,7 @@ const CompletedOrder = () => {
   return (
     <>
       <div
-        className="border border rounded-4 my-3"
+        className="border border rounded-4 my-3 mx-3"
         style={{ backgroundColor: "#F0F0F7" }}
       >
         <div>

@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
       
         <div className="Sidebar my-3 border rounded-4">
-          <User />
+          <User/>
           <AddNewOrder />
           <OrdersList />
           <Settings />

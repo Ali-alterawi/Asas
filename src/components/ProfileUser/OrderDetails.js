@@ -1,39 +1,96 @@
 import React from "react";
-import AllDetails from "../ProfileProvider/AllDetails";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+const OrderDetails = ({ UserId }) => {
+  const [userOrders, setUserOredrs] = useState([]);
+  const { idOrder } = useParams();
+  console.log(UserId);
+  const fetchAllOrdersById = async (req, res) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/order/${UserId}/${idOrder}`
+      );
 
-const OrderDetails = () => {
+      setUserOredrs(response.data);
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllOrdersById();
+  }, []);
+  console.log(userOrders);
   return (
     <>
-    <div className="Main Sidebar my-3">
-      <div class="card text-dark bg-light my-3" style={{ maxWidth: "18rem;" }}>
-        <div class="card-header">Details</div>
-        <div class="card-body">
-          <h5 class="card-title">Applicant's Name:</h5>
-          <p class="card-text">Abd alrahman </p>
-          <h5 class="card-title">Mobile Number:</h5>
-          <p class="card-text">0777777777</p>
-          <h5 class="card-title">E-mail:</h5>
-          <p class="card-text"> alrahman@gmail.com </p>
-          <h5 class="card-title">Services:</h5>
-          <p class="card-text">Engineering Design</p>
-          <h5 class="card-title">Services Providers:</h5>
-          <p class="card-text">KD Engineering</p>
-          <h5 class="card-title">Kind Of Service:</h5>
-          <p class="card-text">Electrical Plan</p>
-          <h5 class="card-title">Description of cleint:</h5>
-          <p class="card-text">
-            amckmsk mamkiamd kimadmakm mkamdkm madmxkam nimakxmd kmkax
-          </p>
-          <h5 class="card-title">Total Area Building:</h5>
-          <p class="card-text">1669 m^2</p>
-          <h5 class="card-title">Payment Stauts:</h5>
-          <p class="card-text">Paid</p>
-          <h5 class="card-title">Price:</h5>
-          <p class="card-text">1400 JOD</p>
-          <h5 class="card-title">Order Stauts:</h5>
-          <p class="card-text">Completed</p>
-        </div>
-      </div>
+      <div className="Main Sidebar my-3">
+        {userOrders.map((detail) => (
+          <div
+            className="card text-dark bg-light my-3 mx-3"
+            style={{ Width: "18rem" }}
+            key={detail._id}
+          >
+            <div className="card-header">Details</div>
+            <div className="card-body">
+              <h5 className="card-title">Applicant's Name:</h5>
+              <p className="card-text">{detail.applicantName}</p>
+              <h5 className="card-title">Mobile Number:</h5>
+              <p className="card-text">{detail.mobileNumber}</p>
+              <h5 className="card-title">E-mail:</h5>
+              <p className="card-text">{detail.email}</p>
+              <h5 className="card-title">location:</h5>
+              <p className="card-text">{detail.location}</p>
+              <h5 className="card-title">Services:</h5>
+              <p className="card-text">{detail.services}</p>
+              <h5 className="card-title">Services Providers:</h5>
+              <p className="card-text">{detail.serviceProvider}</p>
+              <h5 className="card-title">Kind Of Service:</h5>
+              <p className="card-text">{detail.kindOfService}</p>
+              <h5 className="card-title">Description of project:</h5>
+              <p className="card-text">{detail.projectdescription}</p>
+              <h5 className="card-title">Total Area Building:</h5>
+              <p className="card-text">{detail.totalAreaBuilding} m^2</p>
+              <h5 className="card-title">Payment Status:</h5>
+              <p className="card-text">{detail.payment}</p>
+              <h5 className="card-title">Price:</h5>
+              <p className="card-text">{detail.number} JOD</p>
+              <h5 className="card-title">Order Status:</h5>
+              <p className="card-text">{detail.completed}</p>
+            </div>
+            <div className="card-footer">
+              <h5 className="card-title">files:</h5>
+              <div className="d-flex ">
+                {detail.projects?.map((project, index) => (
+                  <div key={index}>
+                    <a
+                      target="_blank"
+                      href={`http://localhost:8000/${project}`}
+                      download
+                      rel="noopener noreferrer"
+                      className="text-black text-decoration-none mb-3 pe-2"
+                      index
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="50"
+                        height="50"
+                        fill="red"
+                        className="bi bi-filetype-pdf"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );
