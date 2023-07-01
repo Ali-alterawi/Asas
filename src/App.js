@@ -117,8 +117,8 @@ function App() {
                 <Route element={<SettingsUser />} path="SettingsUser" />
                 <Route element={<Profile />} path="Profile" />
                 <Route element={<OrderForm UserId={userId0} />} path="OrderForm" />
-                <Route element={<PaymentGate />} path="PaymentGate" />
                 <Route element={<OrderDetails UserId={userId0}/>} path="OrderDetails/:idOrder" />
+                <Route element={<PaymentGate UserId={userId0}/>} path="PaymentGate/:idOrder" />
                 <Route element={<Main />} path="Main" />
               </Routes>
             </div>
@@ -141,13 +141,13 @@ function App() {
             </div>
             <div className="col-lg-8 col-md-12">
               <Routes>
-                <Route element={<OrderPro />} path="/" />
-                <Route element={<OrderPro />} path="OrderPro" />
-                <Route element={<CompletedOrdersPro />} path="CompletedOrdersPro" />
-                <Route element={<NewOrdersPro />} path="NewOrdersPro" />
+                <Route element={<OrderPro UserId={userId0}/>} path="/" />
+                <Route element={<OrderPro UserId={userId0}/>} path="OrderPro" />
+                <Route element={<CompletedOrdersPro UserId={userId0}/>} path="CompletedOrdersPro" />
+                <Route element={<NewOrdersPro UserId={userId0}/>} path="NewOrdersPro" />
                 <Route element={<ProfilePro />} path="ProfilePro" />
                 <Route element={<SettingsPro />} path="SettingsPro" />
-                <Route element={<AllDetails />} path="AllDetails" />
+                <Route element={<AllDetails UserId={userId0} />} path="AllDetails/:idOrder" />
               </Routes>
             </div>
           </div>

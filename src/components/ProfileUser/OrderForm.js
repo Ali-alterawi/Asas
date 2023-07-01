@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const OrderForm = ({ UserId }) => {
-  console.log(UserId);
-  const [firstSelectValue, setFirstSelectValue] = useState("");
-  const [secondSelectValue, setSecondSelectValue] = useState("");
+  // console.log(UserId);
+  const [firstSelectValue, setFirstSelectValue] = useState([]);
+  const [secondSelectValue, setSecondSelectValue] = useState([]);
   const [secondSelectOptions, setSecondSelectOptions] = useState([]);
-  const [thirdSelectValue, setThirdSelectValue] = useState("");
+  const [thirdSelectValue, setThirdSelectValue] = useState([]);
   const [thirdSelectOptions, setThirdSelectOptions] = useState([]);
   const [totalAreaBuilding, setTotalAreaBuilding] = useState("");
   const [number, setNumber] = useState("");
@@ -18,24 +18,82 @@ const OrderForm = ({ UserId }) => {
     handleChange(event);
   };
 
+  const [companiesInterior, setCompaniesInterior] = useState([]);
+  const [companiesQuantity, setCompaniesQuantity] = useState([]);
+  const [companiesEngineering, setCompaniesEngineering] = useState([]);
+
+  useEffect(() => {
+    fetchCompaniesInterior();
+    fetchCompaniesQuantity();
+    fetchCompaniesEngineering();
+  }, []);
+  const optionsMap = {
+    "Engineering design":
+      companiesEngineering.length > 0
+        ? companiesEngineering.map((element, index) => ({
+            index: index + 1,
+            userName: element.userName,
+            id:element._id,
+          }))
+        : [],
+    "Quantity serving":
+      companiesQuantity.length > 0
+        ? companiesQuantity.map((element, index) => ({
+            index: index + 1,
+            userName: element.userName,
+            id:element._id,
+          }))
+        : [],
+    "Interior design":
+      companiesInterior.length > 0
+        ? companiesInterior.map((element, index) => ({
+            index: index + 1,
+            userName: element.userName,
+            id:element._id,
+          }))
+        : [],
+  };
+  // console.log(optionsMap);
+  const fetchCompaniesInterior = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/companiesInterior"
+      );
+      setCompaniesInterior(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchCompaniesQuantity = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/companiesQuantity"
+      );
+      setCompaniesQuantity(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchCompaniesEngineering = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/companiesEngineering"
+      );
+      setCompaniesEngineering(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleFirstSelectChange = (event) => {
     const selectedValue = event.target.value;
     setFirstSelectValue(selectedValue);
 
-    const optionsMap = {
-      "Engineering design": [
-        "KD ENGINEERING",
-        "BLUEPRINT",
-        "BBK",
-        "360ENGINEERING",
-      ],
-      "Quantity serving": [
-        "Real estate company",
-        "Manarah contracting",
-        "feathers construction company",
-      ],
-      "Interior design": ["True Block", "Mirror C.C", "Home contracting"],
-    };
     const optionsMap2 = {
       "Engineering design": [
         "Preparation architectural design plans",
@@ -58,23 +116,26 @@ const OrderForm = ({ UserId }) => {
     };
 
     const updatedOptions = optionsMap[selectedValue] || [];
-    setSecondSelectValue(updatedOptions[0]);
+    setSecondSelectValue(updatedOptions);
     const updatedOptions2 = optionsMap2[selectedValue] || [];
     setThirdSelectValue(updatedOptions2[0]);
 
     setSecondSelectOptions(updatedOptions);
+    console.log(updatedOptions);
     setThirdSelectOptions(updatedOptions2);
   };
 
   const handleSecondSelectChange = (event) => {
     const selectedValue = event.target.value;
     setSecondSelectValue(selectedValue);
+
   };
 
   const handleThirdSelectChange = (event) => {
     const selectedValue = event.target.value;
     setThirdSelectValue(selectedValue);
   };
+
   const handleTotalAreaBuildingChange = (event) => {
     const value = event.target.value;
     setTotalAreaBuilding(value);
@@ -97,7 +158,7 @@ const OrderForm = ({ UserId }) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
+  // console.log(formData);
 
   const handleReportsChange = (event) => {
     setProjects([...event.target.files]);
@@ -111,7 +172,10 @@ const OrderForm = ({ UserId }) => {
       },
     };
 
-    console.log(formData);
+    // console.log(formData);
+
+    const newItems = secondSelectOptions.filter((item) => item.userName === formData.serviceProvider);
+    // console.log(newItems[0].id);
     try {
       const formDataWithFiles = new FormData();
       formDataWithFiles.append("userId", formData.UserId);
@@ -121,6 +185,7 @@ const OrderForm = ({ UserId }) => {
       formDataWithFiles.append("location", formData.location);
       formDataWithFiles.append("services", formData.services);
       formDataWithFiles.append("serviceProvider", formData.serviceProvider);
+      formDataWithFiles.append("offiecsID", newItems[0].id);
       formDataWithFiles.append("kindOfService", formData.kindOfService);
       formDataWithFiles.append(
         "projectDescription",
@@ -243,10 +308,11 @@ const OrderForm = ({ UserId }) => {
               name="serviceProvider"
             >
               {secondSelectOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
+                <option key={option.userName} value={option.userName}>
+                  {option.userName}{console.log(option.userName)}
                 </option>
               ))}
+              
             </select>
             <label htmlFor="thirdSelect">Kind Of Service:</label>
             <select
@@ -286,7 +352,7 @@ const OrderForm = ({ UserId }) => {
                 onChange={(event) => {
                   handleInputChange(event);
                   handleChange(event);
-                  handleTotalAreaBuildingChange(event); // Add this line
+                  handleTotalAreaBuildingChange(event);
                 }}
                 name="totalAreaBuilding"
               />
@@ -303,11 +369,9 @@ const OrderForm = ({ UserId }) => {
               className="form-control"
               type="file"
               id="formFileMultiple2"
-              // name="files"
               name="file"
               multiple
               onChange={handleReportsChange}
-              // ref={fileInputRef} // Add this line
             />
 
             <div className="d-flex justify-content-center py-3">

@@ -2,6 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardImage,
+  MDBRipple,
+} from "mdb-react-ui-kit";
+import logo from "../../images/logo-DWG.png";
 const OrderDetails = ({ UserId }) => {
   const [userOrders, setUserOredrs] = useState([]);
   const { idOrder } = useParams();
@@ -59,7 +67,7 @@ const OrderDetails = ({ UserId }) => {
               <p className="card-text">{detail.completed}</p>
             </div>
             <div className="card-footer">
-              <h5 className="card-title">files:</h5>
+              <h5 className="card-title">files from user:</h5>
               <div className="d-flex ">
                 {detail.projects?.map((project, index) => (
                   <div key={index}>
@@ -88,10 +96,42 @@ const OrderDetails = ({ UserId }) => {
                   </div>
                 ))}
               </div>
+              <h5 className="card-title mt-5">files from Office:</h5>
+              <div className="d-flex">
+                {detail.Images?.map((file, index) => (
+                  <MDBCard className="rounded ms-3 mb-5" key={index} style={{ width: '100px' }}>
+                    <MDBRipple
+                      rippleColor="light"
+                      rippleTag="div"
+                      className="bg-image hover-overlay"
+                    >
+                      <MDBCardImage
+                        src={logo}
+                        fluid
+                        alt="..."
+                        className="pt-3"
+                      />
+                    </MDBRipple>
+                    <MDBCardBody>
+                      <div className="d-flex">
+                        <a
+                          href={`http://localhost:8000/Images/${file}`}
+                          download
+                          rel="noopener noreferrer"
+                          className="text-black text-decoration-none  pe-2 text-center"
+                        >
+                          Click to download
+                        </a>
+                      </div>
+                    </MDBCardBody>
+                  </MDBCard>
+                ))}
+              </div>
             </div>
           </div>
         ))}
       </div>
+
     </>
   );
 };

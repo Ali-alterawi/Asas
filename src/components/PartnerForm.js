@@ -82,9 +82,9 @@ const PartnerForm = () => {
                 name="service"
               >
                 <option>Services: </option>
-                <option>Engineering design</option>
+                <option>Engineering Design</option>
                 <option>Quantity serving</option>
-                <option>Interior design</option>
+                <option>Interior Design</option>
               </select>
             </div>
             {/* <!-- text area --> */}

@@ -19,7 +19,7 @@ const LogInForm = () => {
        localStorage.setItem("token", token);
 
       // Redirect to the home page or any other desired route
-      navigate("/");
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
     }

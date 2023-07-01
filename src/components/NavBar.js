@@ -9,6 +9,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   // Check if token exists in local storage
   const token = localStorage.getItem('token');
+  // window.location.href = '/';
 
   // Function to handle logout
   const handleLogout = () => {

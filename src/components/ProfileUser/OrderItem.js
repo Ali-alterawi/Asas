@@ -36,7 +36,7 @@ const OrderItem = ({ UserId }) => {
               <div className="d-flex flex-row justify-content-between align-items-baseline">
                 <h5 className="fw-bold ms-4">{order.services}</h5>
                 <div className="d-flex flex-row align-items-center">
-                  <Link to="/PaymentGate">
+                  <Link to= {`/PaymentGate/${order._id}`}  >
                     <button className="me-3 calculator mt-3">Payment</button>
                   </Link>
                   <Link to={`/OrderDetails/${order._id}`}>
@@ -58,7 +58,7 @@ const OrderItem = ({ UserId }) => {
           </div>
         ))
       ) : (
-        <div className="text-center h-24">No orders available</div>
+        <div className="text-center h-24">you have not order yet</div>
       )}
     </>
   );
