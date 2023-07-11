@@ -10,6 +10,7 @@ import {
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 export default function PaymentGate({ UserId }) {
   const [userOrders, setUserOredrs] = useState([]);
   const { idOrder } = useParams();
@@ -135,6 +136,13 @@ export default function PaymentGate({ UserId }) {
           cvv: "",
         });
         console.log("state of payment has been updated");
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'your order status has been changed to be paid',
+          showConfirmButton: false,
+          timer: 3000
+        });
       }
       catch(err){
         console.error("Error change state of payment:", err);
@@ -168,8 +176,8 @@ export default function PaymentGate({ UserId }) {
               <div className="d-flex flex-column">
                 {userOrders.map((order) => (
                   <div key={order.number}>
-                    <p className="mb-1 small text-primary">Total amount due</p>
-                    <h6 className="mb-0 text-primary">{order.number} JOD</h6>
+                    <p className="mb-1 small text-primary">Total amount</p>
+                    <h6 className="mb-0 text-primary">{order.number}</h6>
                   </div>
                 ))}
               </div>

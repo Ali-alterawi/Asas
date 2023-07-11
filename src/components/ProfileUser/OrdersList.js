@@ -28,7 +28,7 @@ const OrdersList = () => {
         <div className="items d-flex flex-column">
         
           <Link className="text-black text-decoration-none" to="OrderItems">Orders</Link>
-          <Link className="text-black text-decoration-none" to="CompletedOrders">Completed Orders</Link>
+          {/* <Link className="text-black text-decoration-none" to="CompletedOrders">Completed Orders</Link> */}
         </div>)}
       </div>
     </>

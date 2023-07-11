@@ -99,7 +99,7 @@ const PartnerForm = () => {
             </div>
 
             <button class="w-100 calculator" type="submit">
-              submit
+              Join Us
             </button>
           </form>
         </div>

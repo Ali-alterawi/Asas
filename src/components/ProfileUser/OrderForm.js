@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const OrderForm = ({ UserId }) => {
   // console.log(UserId);
@@ -14,7 +15,7 @@ const OrderForm = ({ UserId }) => {
   // const fileInputRef = useRef(null); // Ref for file input
 
   const handleInputChange = (event) => {
-    setNumber(`The Price is ${Number(event.target.value) * 2}`);
+    setNumber(`The Price is ${Number(event.target.value) * 2} JOD`);
     handleChange(event);
   };
 
@@ -185,10 +186,10 @@ const OrderForm = ({ UserId }) => {
       formDataWithFiles.append("location", formData.location);
       formDataWithFiles.append("services", formData.services);
       formDataWithFiles.append("serviceProvider", formData.serviceProvider);
-      formDataWithFiles.append("offiecsID", newItems[0].id);
+      formDataWithFiles.append("offiecsID", newItems[0]?.id);
       formDataWithFiles.append("kindOfService", formData.kindOfService);
       formDataWithFiles.append(
-        "projectDescription",
+        "projectdescription",
         formData.projectdescription
       );
       formDataWithFiles.append("totalAreaBuilding", totalAreaBuilding);
@@ -206,7 +207,13 @@ const OrderForm = ({ UserId }) => {
         formDataWithFiles
         // config
       );
-
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your order has been sent successfully, please pay ASAP',
+        showConfirmButton: false,
+        timer: 3000
+      })
       console.log("Data sent successfully");
     } catch (error) {
       console.error("Error:", error.message);
@@ -340,7 +347,7 @@ const OrderForm = ({ UserId }) => {
               rows="10"
               placeholder="        ..."
               className="w-100 form-control"
-              name="projectDescription"
+              name="projectdescription"
               onChange={handleChange}
             ></textarea>
             <div class="form-floating my-3">
@@ -358,7 +365,7 @@ const OrderForm = ({ UserId }) => {
               />
               <label for="floatingUserName">Total Area Building:</label>
             </div>
-            <p>{number}$</p>
+            <p>{number}</p>
             <label
               htmlFor="formFileMultiple2"
               className="form-label text-capitalize"

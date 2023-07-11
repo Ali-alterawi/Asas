@@ -31,6 +31,27 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.custom-file-input {
+  /* Customize the appearance */
+  background-color: #f1f1f1;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.custom-file-label {
+  /* Customize the label appearance */
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  color: #555;
+  cursor: pointer;
+}
 /* AddNewOrder */
 .AddNewOrder {
   border-bottom: 1px solid #ebebeb;

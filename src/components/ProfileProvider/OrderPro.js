@@ -3,9 +3,9 @@ import axios from "axios";
 import image from "../../images/image.jpg";
 import { Link } from "react-router-dom";
 
-const OrderPro = ({UserId}) => {
+const OrderPro = ({ UserId }) => {
   const [orders, setOrders] = useState([]);
-console.log(UserId);
+  console.log(UserId);
   useEffect(() => {
     fetchOrders();
   }, []);
@@ -13,7 +13,9 @@ console.log(UserId);
   const fetchOrders = async () => {
     console.log(UserId);
     try {
-      const response = await axios.get(`http://localhost:8000/OfficeOrders/${UserId}`);
+      const response = await axios.get(
+        `http://localhost:8000/OfficeOrders/${UserId}`
+      );
       setOrders(response.data);
       console.log(response.data);
     } catch (error) {
@@ -32,7 +34,7 @@ console.log(UserId);
               <th scope="col">Type of service</th>
               <th scope="col">Status</th>
               <th scope="col">Payment</th>
-              <th scope="col">Change Status to</th>
+              <th scope="col">Price</th>
               <th scope="col">Details</th>
             </tr>
           </thead>
@@ -57,18 +59,30 @@ console.log(UserId);
                   <p className="text-muted mb-0">{order.kindOfService}</p>
                 </td>
                 <td>
-                  <span className={`badge ${order.completed === 'completed' ? 'bg-success' : 'bg-primary'}`}>{order.completed}</span>
+                  <span
+                    className={`badge ${
+                      order.completed === "completed"
+                        ? "bg-success"
+                        : "bg-primary"
+                    }`}
+                  >
+                    {order.completed}
+                  </span>
                 </td>
                 <td>{order.payment}</td>
                 <td>
-                  <button className="btn btn-link rounded text-decoration-none text-black" type="button">
-                    completed
-                  </button>
+                  <p className="text-muted mb-0">{order.number}</p>
                 </td>
                 <td>
-                 <Link to= {`/AllDetails/${order._id}`} > <button className="btn btn-link rounded text-decoration-none text-black" type="button">
-                    View more
-                  </button></Link>
+                  <Link to={`/AllDetails/${order._id}`}>
+                    {" "}
+                    <button
+                      className="btn btn-link rounded text-decoration-none text-black"
+                      type="button"
+                    >
+                      View more
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

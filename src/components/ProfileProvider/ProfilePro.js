@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const [userId, setUserId] = useState("");
@@ -60,11 +61,27 @@ const Profile = () => {
   const handleSaveClick = async () => {
     try {
       const response = await axios.put(`http://localhost:8000/User/${userId}`, updatedUser);
-      // console.log(response.data); // Assuming the response contains the updated user data
+      // console.log(response.data); 
 
       setIsEditMode(false);
-      // Optionally, you can update the userDetail state with the updated user data
       setUserDetail([response.data]);
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You profile will updated!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#064080',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, I am sure'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'updated!',
+            'Your profile has been updated.',
+            'success'
+          )
+        }
+      })
     } catch (error) {
       console.error("Error updating user data:", error);
       // Handle the error here

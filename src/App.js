@@ -15,7 +15,7 @@ import OrderForm from "./components/ProfileUser/OrderForm";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import OrderItems from "./components/ProfileUser/OrderItems";
-import CompletedOrders from "./components/ProfileUser/CompletedOrders";
+// import CompletedOrders from "./components/ProfileUser/CompletedOrders";
 import SettingsUser from "./components/ProfileUser/SettingsUser";
 import Profile from "./components/ProfileUser/Profile";
 import Sidebar from "./components/ProfileUser/Sidebar";
@@ -113,7 +113,7 @@ function App() {
               <Routes>
                 <Route element={<OrderItems UserId={userId0} />} path="/" />
                 <Route element={<OrderItems UserId={userId0} />} path="OrderItems" />
-                <Route element={<CompletedOrders />} path="CompletedOrders" />
+                {/* <Route element={<CompletedOrders />} path="CompletedOrders" /> */}
                 <Route element={<SettingsUser />} path="SettingsUser" />
                 <Route element={<Profile />} path="Profile" />
                 <Route element={<OrderForm UserId={userId0} />} path="OrderForm" />

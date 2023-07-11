@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import emailjs from '@emailjs/browser';
 
 const UploadFile = ({ idOrder }) => {
-    console.log(idOrder);
+  console.log(idOrder);
   const [selectedFiles, setSelectedFiles] = useState([]);
-console.log(selectedFiles);
+  const [userEmail, setUserEmail] = useState("");
+  console.log(userEmail);
+  console.log(selectedFiles)
+  
+  useEffect(() => {
+    // Fetch user details including email from the MongoDB database
+    
+
+    fetchUserDetails();
+  }, [idOrder]);
+  const fetchUserDetails = async () => {
+    try {
+      console.log(idOrder);
+
+      const response = await axios.get(`http://localhost:8000/orderemail/${idOrder}`);
+      setUserEmail(response.data[0].email);
+      console.log(response.data[0].email);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
   const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
   };
@@ -28,7 +50,26 @@ console.log(selectedFiles);
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("Order updated successfully");
+      // Send email to the user
+      const templateParams = {
+        email: userEmail,
+        subject: "Files Received",
+        message: "Your files have been successfully received.",
+      };
+
+      await emailjs.send(
+        "service_0xzkggn",
+        "template_gmzfip3",
+        templateParams,
+        "ySXhwWkA6BxFhzPF1"
+      );
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "you have sent the files successfully to users",
+        showConfirmButton: false,
+        timer: 3000,
+      });
     } catch (error) {
       console.error("Error updating order:", error);
       alert("Error updating order. Please try again.");
@@ -36,9 +77,12 @@ console.log(selectedFiles);
   };
 
   return (
-    <div>
-      <form className="shadow p-3 rounded-4 mb-5 opacity-100 form-P">
-        <label htmlFor="formFileMultiple2" className="form-label text-capitalize">
+    <div className="ps-3 pe-3">
+      <form className="shadow p-3 rounded-3 mb-5 opacity-100 form-P">
+        <label
+          htmlFor="formFileMultiple2"
+          className="form-label text-capitalize"
+        >
           Upload a file
         </label>
         <input
@@ -51,7 +95,7 @@ console.log(selectedFiles);
         <div className="d-flex justify-content-center py-3">
           <input
             type="submit"
-            value="Submit"
+            value="send files"
             id="submit"
             className="w-100 calculator"
             onClick={handleSubmit}

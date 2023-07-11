@@ -6,7 +6,6 @@ import UploadFile from "./UploadFile";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
   MDBCardImage,
   MDBRipple,
 } from "mdb-react-ui-kit";
@@ -45,7 +44,7 @@ const AllDetails = ({ UserId }) => {
   // console.log(orders);
   return (
     <>
-      <div className="Main Sidebar my-3">
+      <div className="Main Sidebar my-3 border rounded-4">
         <UploadFile idOrder={idOrder} />
         {orders.map((detail) => (
           <div
@@ -76,7 +75,7 @@ const AllDetails = ({ UserId }) => {
               <h5 className="card-title">Payment Status:</h5>
               <p className="card-text">{detail.payment}</p>
               <h5 className="card-title">Price:</h5>
-              <p className="card-text">{detail.number} JOD</p>
+              <p className="card-text">{detail.number}</p>
               <h5 className="card-title">Order Status:</h5>
               <p className="card-text">{detail.completed}</p>
             </div>
@@ -131,6 +130,7 @@ const AllDetails = ({ UserId }) => {
                         <a
                           href={`http://localhost:8000/${Image}`}
                           download
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="text-black text-decoration-none  pe-2 text-center"
                         >

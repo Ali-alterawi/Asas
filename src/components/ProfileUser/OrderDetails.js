@@ -117,6 +117,7 @@ const OrderDetails = ({ UserId }) => {
                         <a
                           href={`http://localhost:8000/Images/${file}`}
                           download
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="text-black text-decoration-none  pe-2 text-center"
                         >

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const [userId, setUserId] = useState("");
@@ -8,7 +9,7 @@ const Profile = () => {
   const [updatedUser, setUpdatedUser] = useState({
     userName: "",
     email: "",
-    phone: ""
+    phone: "",
   });
 
   useEffect(() => {
@@ -17,24 +18,26 @@ const Profile = () => {
         const token = localStorage.getItem("token");
 
         if (token) {
-          const response = await axios.get("http://localhost:8000/Verify_token", {
-            headers: {
-              Authorization: token,
-            },
-          });
+          const response = await axios.get(
+            "http://localhost:8000/Verify_token",
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
           const id = response.data.user.id;
           setUserId(id);
-          // console.log(id);
 
-          const userResponse = await axios.get(`http://localhost:8000/User0/${id}`);
+          const userResponse = await axios.get(
+            `http://localhost:8000/User0/${id}`
+          );
           setUserDetail(userResponse.data);
         } else {
-          // Handle the case when token is missing
-          console.log("Error becuase no token");
+          console.log("Error because no token");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        // Handle the error here
       }
     };
 
@@ -46,30 +49,65 @@ const Profile = () => {
     setUpdatedUser({
       userName: userDetail[0].userName,
       email: userDetail[0].email,
-      phone: userDetail[0].phone
+      phone: userDetail[0].phone,
     });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setUpdatedUser((prevState) => ({
+      ...prevState,
+      photo: file,
+      imagePreview: URL.createObjectURL(file),
+    }));
   };
 
   const handleInputChange = (e) => {
-    setUpdatedUser({
-      ...updatedUser,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setUpdatedUser((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
-// console.log(updatedUser);
+
   const handleSaveClick = async () => {
     try {
-      const response = await axios.put(`http://localhost:8000/User/${userId}`, updatedUser);
-      // console.log(response.data); // Assuming the response contains the updated user data
-
+      const formData = new FormData();
+  
+      formData.append("userName", updatedUser.userName);
+      formData.append("phone", updatedUser.phone);
+      formData.append("photo", updatedUser.photo); 
+  
+      const response = await axios.put(
+        `http://localhost:8000/User/${userId}`,
+        formData
+      );
+  
       setIsEditMode(false);
-      // Optionally, you can update the userDetail state with the updated user data
       setUserDetail([response.data]);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Your profile will be updated!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#064080",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, I am sure",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Updated!",
+            "Your profile has been successfully updated.",
+            "success"
+          );
+        }
+      });
     } catch (error) {
       console.error("Error updating user data:", error);
-      // Handle the error here
     }
   };
+  
+
 
   return (
     <div className="Main Sidebar my-3 border rounded-4">
@@ -78,12 +116,18 @@ const Profile = () => {
           <div className="d-flex flex-row justify-content-between">
             <h2 className="p-3 ms-3">Profile</h2>
             {!isEditMode && (
-              <button className="calculator mx-2 mt-2" onClick={handleEditClick}>
+              <button
+                className="calculator mx-2 mt-2"
+                onClick={handleEditClick}
+              >
                 Edit
               </button>
             )}
           </div>
-          <div className="border border rounded-4 my-3" style={{ backgroundColor: "#F0F0F7" }}>
+          <div
+            className="border border rounded-4 my-3"
+            style={{ backgroundColor: "#F0F0F7" }}
+          >
             <div className="profileUser p-5">
               {isEditMode ? (
                 <React.Fragment>
@@ -106,8 +150,26 @@ const Profile = () => {
                       className="form-floating"
                     />
                   </h5>
-                  <button className="editButton" onClick={handleSaveClick}>Save</button>
-                  <button className="editButton" onClick={() => setIsEditMode(false)}>Cancel</button>
+                  <h5>
+                    <input
+                      type="file"
+                      id="photo"
+                      name="photo"
+                      accept="image/*"
+                      class="custom-file-input"
+                      required
+                      onChange={handleImageChange}
+                    />
+                  </h5>
+                  <button className="editButton" onClick={handleSaveClick}>
+                    Save
+                  </button>
+                  <button
+                    className="editButton"
+                    onClick={() => setIsEditMode(false)}
+                  >
+                    Cancel
+                  </button>
                 </React.Fragment>
               ) : (
                 <React.Fragment>

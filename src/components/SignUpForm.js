@@ -90,7 +90,7 @@ const SignUpForm = () => {
                   <label for="floatingPassword">Password</label>
                 </div>
                 <button class="w-100 calculator" type="submit">
-                  Send
+                  Register
                 </button>
               </form>
             </div>

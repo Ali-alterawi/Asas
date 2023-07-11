@@ -33,7 +33,7 @@ const NewOrdersPro = ({UserId}) => {
               <th scope="col">Type of service</th>
               <th scope="col">Status</th>
               <th scope="col">Payment</th>
-              <th scope="col">Actions</th>
+              <th scope="col">Price</th>
               <th scope="col">Details</th>
             </tr>
           </thead>
@@ -62,9 +62,7 @@ const NewOrdersPro = ({UserId}) => {
                 </td>
                 <td>{order.payment}</td>
                 <td>
-                  <button className="btn btn-link rounded text-decoration-none text-black" type="button">
-                    Edit
-                  </button>
+                <p className="text-muted mb-0">{order.number}</p>
                 </td>
                 <td>
                 <Link to= {`/AllDetails/${order._id}`} > <button className="btn btn-link rounded text-decoration-none text-black" type="button">

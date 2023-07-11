@@ -7,6 +7,14 @@ const SettingsListPro = () => {
   const toggleElementsVisibility = () => {
     setElementsVisible(!elementsVisible);
   };
+
+  const handleLogout = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem("token");
+  
+    // Refresh the page
+    window.location.reload();
+  };
   return (
     <>
       <div className="Settings">
@@ -30,9 +38,9 @@ const SettingsListPro = () => {
               <Link className="text-black text-decoration-none mb-2" to="SettingsPro">
               Settings
               </Link>
-              <Link className="text-black text-decoration-none mb-2" to="">
-              Logout
-              </Link>
+              <Link className="text-black text-decoration-none" to="/" onClick={handleLogout}>
+  Logout
+</Link>
             </div>
           )}
         </div>
