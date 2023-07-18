@@ -1,5 +1,5 @@
 import React from "react";
-import "../Css/Distinguish.css"
+import "../Css/Distinguish.css";
 
 const Distinguish = () => {
   return (
@@ -17,6 +17,18 @@ const Distinguish = () => {
               <div class="feat">
                 <div class="icon-holder position-relative">
                   <i class="fa-solid fa-1 position-absolute bottom-0 number"></i>
+                  <i class="fa-sharp fa-solid fa-envelope fa-4x position-absolute bottom-0 icon"></i>
+                </div>
+                <h4 class="mb-3 mt-3 text-uppercase">notification by email</h4>
+                <p class="text-black-50 lh-lg">
+                  Get an email when your order is completed
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat">
+                <div class="icon-holder position-relative">
+                  <i class="fa-solid fa-2 position-absolute bottom-0 number"></i>
                   <i class="fa-solid fa-money-bill-1-wave fa-4x position-absolute bottom-0 icon"></i>
                 </div>
                 <h4 class="mb-3 mt-3 text-uppercase">Secure your money</h4>
@@ -29,26 +41,12 @@ const Distinguish = () => {
             <div class="col-md-6 col-lg-4">
               <div class="feat">
                 <div class="icon-holder position-relative">
-                  <i class="fa-solid fa-2 position-absolute bottom-0 number"></i>
-                  <i class="fa-solid fa-message fa-4x position-absolute bottom-0 icon"></i>
-                </div>
-                <h4 class="mb-3 mt-3 text-uppercase">Response with 48hours</h4>
-                <p class="text-black-50 lh-lg">
-                  Get a first response within 48 hours with an initial cost,
-                  except Public holidays and Official holidays.
-                </p>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-              <div class="feat">
-                <div class="icon-holder position-relative">
                   <i class="fa-solid fa-3 position-absolute bottom-0 number"></i>
                   <i class="fa-solid fa-calculator fa-4x position-absolute bottom-0 icon"></i>
                 </div>
-                <h4 class="mb-3 mt-3 text-uppercase">Auto-calculator</h4>
+                <h4 class="mb-3 mt-3 text-uppercase">Fixed preice</h4>
                 <p class="text-black-50 lh-lg">
-                  Calculate the cost by using our online calculator, it will
-                  save you time and let you expect the initial value.
+                  We guarantee to keep the same price from the start
                 </p>
               </div>
             </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { CaretUp, Gear} from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { CaretUp, Gear } from "react-bootstrap-icons";
+import { Link, useNavigate } from "react-router-dom";
+
 const SettingsListPro = () => {
   const [elementsVisible, setElementsVisible] = useState(true);
+  const navigate = useNavigate();
 
   const toggleElementsVisibility = () => {
     setElementsVisible(!elementsVisible);
@@ -11,17 +13,20 @@ const SettingsListPro = () => {
   const handleLogout = () => {
     // Remove the token from localStorage
     localStorage.removeItem("token");
-  
+
     // Refresh the page
+    navigate("/");
     window.location.reload();
+    // Navigate back to "/"
   };
+
   return (
     <>
       <div className="Settings">
         <div className="header">
           <div className="title">
             <Gear size="18" />
-            <p style={{marginBottom: "0"}}>Settings</p>
+            <p style={{ marginBottom: "0" }}>Settings</p>
           </div>
           <div className="btns">
             <span>
@@ -29,18 +34,28 @@ const SettingsListPro = () => {
             </span>
           </div>
         </div>
-        <div className="items" >
-        {elementsVisible && (
+        <div className="items">
+          {elementsVisible && (
             <div className="items d-flex flex-column">
-              <Link className="text-black text-decoration-none mb-2" to="ProfilePro">
-              Profile
+              <Link
+                className="text-black text-decoration-none mb-2"
+                to="ProfilePro"
+              >
+                Profile
               </Link>
-              <Link className="text-black text-decoration-none mb-2" to="SettingsPro">
-              Settings
+              <Link
+                className="text-black text-decoration-none mb-2"
+                to="SettingsPro"
+              >
+                Settings
               </Link>
-              <Link className="text-black text-decoration-none" to="/" onClick={handleLogout}>
-  Logout
-</Link>
+              <Link
+                className="text-black text-decoration-none"
+                to="/"
+                onClick={handleLogout}
+              >
+                Logout
+              </Link>
             </div>
           )}
         </div>

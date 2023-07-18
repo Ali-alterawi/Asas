@@ -29,3 +29,6 @@
   background-color: #064080;
   color: #fff;
 }
+.white-placeholder::placeholder {
+  color: white;
+}

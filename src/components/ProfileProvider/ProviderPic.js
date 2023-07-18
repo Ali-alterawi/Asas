@@ -50,7 +50,14 @@ const User = () => {
       {userDetail.map((detail) => (
         <div key={detail._id} className="User my-2">
           <div className="logo">
-            <img src={profile} alt="testimalion3" />
+          <img
+              src={
+                detail?.photo
+                  ?  `http://localhost:8000/${detail.photo}`
+                  : "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg"
+              }
+              alt="Profile"
+            />
           </div>
           <div className="info">
             <p>{detail.userName}</p>

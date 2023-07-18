@@ -1,20 +1,20 @@
-import React from 'react';
-import img1 from '../images/img1.png';
-import '../Css/NavBar.css';
-import { Link } from 'react-router-dom';
-import { NavDropdown } from 'react-bootstrap';
+import React from "react";
+import img1 from "../images/logo1.png";
+import "../Css/NavBar.css";
+import { Link } from "react-router-dom";
+import { NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
   // Check if token exists in local storage
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   // window.location.href = '/';
 
   // Function to handle logout
   const handleLogout = () => {
     // Clear token from local storage
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     // Refresh the page to reset the state
     navigate("/");
     window.location.reload();
@@ -25,8 +25,9 @@ const NavBar = () => {
       <header>
         <nav className="navbar navbar-expand-lg bg-body-tertiary shadow">
           <div className="container">
-            <a className="navbar-brand" href="aaaa">
-              <img src={img1} alt="Logo" /> TENT
+            <a className="navbar-brand" href="/">
+              <img src={img1} alt="Logo" />{" "}
+              <span className="d-inline letter-spacing">ASAS</span>
             </a>
             <button
               className="navbar-toggler"
@@ -42,7 +43,11 @@ const NavBar = () => {
             <div className="collapse navbar-collapse" id="main">
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav-fill">
                 <li className="nav-item">
-                  <Link className="nav-link p-lg-3  active" aria-current="page" to="/">
+                  <Link
+                    className="nav-link p-lg-3  active"
+                    aria-current="page"
+                    to="/"
+                  >
                     Home
                   </Link>
                 </li>
@@ -67,11 +72,26 @@ const NavBar = () => {
                   </Link>
                 </li>
                 {token ? (
-                  <NavDropdown title="My Account" className='p-lg-2 ' id="basic-nav-dropdown">
-                    <NavDropdown.Item className=' nav-link' as={Link} to="/Profile">
+                  <NavDropdown
+                    title="My Account"
+                    className="p-lg-2 "
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item
+                      className=" nav-link"
+                      as={Link}
+                      to="/Profile"
+                    >
                       My Profile
                     </NavDropdown.Item>
-                    <NavDropdown.Item onClick={handleLogout} className=' nav-link'as={Link} to="/">Logout</NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={handleLogout}
+                      className=" nav-link"
+                      as={Link}
+                      to="/"
+                    >
+                      Logout
+                    </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <>
@@ -81,7 +101,10 @@ const NavBar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/PartnerPage" className="nav-link p-lg-3 active">
+                      <Link
+                        to="/PartnerPage"
+                        className="nav-link p-lg-3 active"
+                      >
                         Join us
                       </Link>
                     </li>
