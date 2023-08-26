@@ -7,15 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  // Check if token exists in local storage
   const token = localStorage.getItem("token");
-  // window.location.href = '/';
 
-  // Function to handle logout
   const handleLogout = () => {
-    // Clear token from local storage
     localStorage.removeItem("token");
-    // Refresh the page to reset the state
     navigate("/");
     window.location.reload();
   };
@@ -81,6 +76,7 @@ const NavBar = () => {
                       className=" nav-link"
                       as={Link}
                       to="/Profile"
+                      
                     >
                       My Profile
                     </NavDropdown.Item>

@@ -58,7 +58,11 @@ const OrderItem = ({ UserId }) => {
           </div>
         ))
       ) : (
-        <div className="text-center h-24">you have not order yet</div>
+        <div className="text-center" style={{height:"20.5rem"}}>
+          <div className="d-flex justify-content-center align-items-center fs-4 fst-italic" style={{height:"18rem" , textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",}}>
+          you have not order yet
+          </div>
+          </div>
       )}
     </>
   );

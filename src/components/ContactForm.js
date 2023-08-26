@@ -1,14 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiEmail, mdiPhone, mdiGoogleMaps } from "@mdi/js";
 import "../Css/ContactForm.css";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ContactForm = () => {
   const mystyle = {
     color: "#fff",
     backgroundColor: "#064080",
   };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/oneMessage",
+        formData
+      );
+      console.log(response.data);
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "Your message has been sent successfully!",
+    });
+
+    // Clear the form inputs after successful submission
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while sending your message. Please try again later.",
+      });
+    }
+  };
+
   return (
     <>
       <div className="container text-center my-5">
@@ -44,7 +92,7 @@ const ContactForm = () => {
                 target="_blank"
                 className="text-blue text-decoration-none"
               >
-                support@tent.com
+                support@ASAS.com
               </Link>
             </p>
             <p>
@@ -54,58 +102,60 @@ const ContactForm = () => {
                 target="_blank"
                 className="text-blue text-decoration-none"
               >
-                info@tent.com
+                info@ASAs.com
               </Link>
             </p>
           </div>
         </div>
       </div>
-      <form className="container my-5">
+      <form className="container my-5" onSubmit={handleSubmit}>
         <h2 className="text-center my-5">Get in touch with us</h2>
-        {/* <!-- Name input --> */}
-        <div class="form-outline mb-4">
-          <input type="text" id="form4Example1" class="form-control" />
-          <label class="form-label text-white" for="form4Example1">
+        <div className="form-outline mb-4">
+          <input
+            type="text"
+            id="form4Example1"
+            className="form-control"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <label className="form-label text-white" htmlFor="form4Example1">
             Name
           </label>
         </div>
 
-        {/* <!-- Email input --> */}
-        <div class="form-outline mb-4">
-          <input type="email" id="form4Example2" class="form-control" />
-          <label class="form-label text-white" for="form4Example2">
+        <div className="form-outline mb-4">
+          <input
+            type="email"
+            id="form4Example2"
+            className="form-control"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <label className="form-label text-white" htmlFor="form4Example2">
             Email address
           </label>
         </div>
 
-        {/* <!-- Message input --> */}
-        <div class="form-outline mb-4">
-          <textarea class="form-control" id="form4Example3" rows="4"></textarea>
-          <label class="form-label text-white" for="form4Example3">
+        <div className="form-outline mb-4">
+          <textarea
+            className="form-control"
+            id="form4Example3"
+            rows="4"
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+          ></textarea>
+          <label className="form-label text-white" htmlFor="form4Example3">
             Message
           </label>
         </div>
 
-        {/* <!-- Checkbox --> */}
-        <div class="form-check d-flex justify-content-center mb-4">
-          <input
-            class="form-check-input me-2"
-            style={mystyle}
-            type="checkbox"
-            value=""
-            id="form4Example4"
-            checked
-          />
-          <label class="form-check-label" for="form4Example4">
-            Send me a copy of this message
-          </label>
-        </div>
-
-        {/* <!-- Submit button --> */}
         <button
-          // style={mystyle}
           type="submit"
-          class="calculator mx-auto d-block"
+          className="calculator mx-auto d-block"
+          style={mystyle}
         >
           Send
         </button>

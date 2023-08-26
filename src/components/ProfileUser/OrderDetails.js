@@ -13,7 +13,7 @@ import logo from "../../images/logo-DWG.png";
 const OrderDetails = ({ UserId }) => {
   const [userOrders, setUserOredrs] = useState([]);
   const { idOrder } = useParams();
-  console.log(UserId);
+  // console.log(UserId);
   const fetchAllOrdersById = async (req, res) => {
     try {
       const response = await axios.get(
@@ -62,7 +62,7 @@ const OrderDetails = ({ UserId }) => {
               <h5 className="card-title">Payment Status:</h5>
               <p className="card-text">{detail.payment}</p>
               <h5 className="card-title">Price:</h5>
-              <p className="card-text">{detail.number} JOD</p>
+              <p className="card-text">{detail.number}</p>
               <h5 className="card-title">Order Status:</h5>
               <p className="card-text">{detail.completed}</p>
             </div>
