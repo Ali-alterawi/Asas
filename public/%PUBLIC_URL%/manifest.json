@@ -1,0 +1,21 @@
+{
+    "name": "ASAS",
+    "short_name": "ASAS",
+    "description": "buliding , planing and more",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#1E8FD9",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

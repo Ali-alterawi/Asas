@@ -1,6 +1,7 @@
 import React,{useRef} from "react";
 
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const PartnerForm = () => {
   const formRef = useRef(null);
@@ -9,6 +10,7 @@ const PartnerForm = () => {
 
     const formData = {
       role: 0,
+      isActive: false,
       userName: event.target.elements.userName.value,
       email: event.target.elements.email.value,
       phone: event.target.elements.phone.value,
@@ -16,12 +18,27 @@ const PartnerForm = () => {
       password: event.target.elements.password.value,
       message: event.target.elements.message.value,
     };
+    console.log(formData);
     try {
       const res = await axios.post("http://localhost:8000/User", formData);
       console.log("Form data sent successfully to server from react");
       formRef.current.reset();
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration successful!',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      // Redirect to the home page or any other desired route
+      window.location.href = '/';
+      
     } catch (error) {
       console.log("Error sending form from react:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration failed',
+        text: 'Please try again.',
+      });
     }
   };
   return (

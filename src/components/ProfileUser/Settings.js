@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CaretUp, Gear} from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 const Settings = () => {
   const [elementsVisible, setElementsVisible] = useState(true);
 
@@ -11,9 +11,11 @@ const Settings = () => {
   const handleLogout = () => {
     // Remove the token from localStorage
     localStorage.removeItem("token");
-  
+
     // Refresh the page
+    Navigate("/");
     window.location.reload();
+    // Navigate back to "/"
   };
   return (
     <>
@@ -35,9 +37,13 @@ const Settings = () => {
           <Link className="text-black text-decoration-none" to="Profile">Profile</Link>
           <Link className="text-black text-decoration-none" to="SettingsUser">Settings Orders</Link>
           <Link className="text-black text-decoration-none" to="Soon">Contact admin</Link>
-          <Link className="text-black text-decoration-none" to="/" onClick={handleLogout}>
-  Logout
-</Link>
+          <Link
+                className="text-black text-decoration-none"
+                to="/"
+                onClick={handleLogout}
+              >
+                Logout
+              </Link>
         </div>)}
       </div>
     </>

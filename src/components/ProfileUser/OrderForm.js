@@ -217,6 +217,11 @@ const OrderForm = ({ UserId }) => {
       console.log("Data sent successfully");
     } catch (error) {
       console.error("Error:", error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'failed to send order',
+        text: 'you should select provider and kind of service',
+      });
     }
   };
 

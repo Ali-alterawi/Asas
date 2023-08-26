@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const LogInForm = () => {
   const [email, setEmail] = useState("");
@@ -9,19 +10,50 @@ const LogInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post("http://localhost:8000/loginUser", {
         email,
         password,
       });
-      const token = await response.data.token;
-       localStorage.setItem("token", token);
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+  
 
-      // Redirect to the home page or any other desired route
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged in successfully!',
+        showConfirmButton: false,
+        timer: 3000,
+      });
+  
+
       window.location.href = '/';
     } catch (error) {
       console.error(error);
+  
+      if (error.response && error.response.status === 403) {
+       
+        Swal.fire({
+          icon: 'error',
+          title: 'Account Inactive',
+          text: error.response.data.message,
+        });
+        
+      }else if (error.response.status === 405) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Account deleted',
+          text: error.response.data.message,
+        });
+      }  else {
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Login failed',
+          text: 'Invalid email or password',
+        });
+      }
     }
   };
 
@@ -32,7 +64,7 @@ const LogInForm = () => {
           <div class="sign-in">
             <div class="textSignUp">
               <h1>Sign in to </h1>
-              <h2 className="my-5">Tent is simply </h2>
+              <h2 className="my-5">ASAS is simply </h2>
               <h5 className="mb-3">If you don’t have an account register</h5>
               <h5>
                 You can{" "}
@@ -85,17 +117,6 @@ const LogInForm = () => {
                 <button class="w-100 calculator" type="submit">
                   Log in
                 </button>
-
-                <div class="text-center py-4">
-                  <p>or sign up with:</p>
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fa-brands fa-square-facebook fa-2x"></i>
-                  </button>
-
-                  <button type="button" class="btn btn-link btn-floating mx-1">
-                    <i class="fa-brands fa-google fa-2x"></i>
-                  </button>
-                </div>
               </form>
             </div>
           </div>
